@@ -25,3 +25,5 @@ Suggests:
     rmarkdown
 SystemRequirements: JAGS (http://mcmc-jags.sourceforge.net)
 VignetteBuilder: knitr
+URL: https://github.com/reymath99/saeHB.twofold
+BugReports: https://github.com/reymath99/saeHB.twofold/issues
