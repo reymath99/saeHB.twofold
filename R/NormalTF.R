@@ -204,14 +204,14 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     beta <- cbind(beta, q_beta)
     Estimation <- data.frame(Estimation1,q_mu)
     colnames(Estimation) <- c("Mean","SD","2.5%","25%","50%","75%","97.5%")
+    w<-gr<-0
     Estimation_area<-data.frame(cbind(Estimation1,w=data[,weight],code=data[,area]))
     Estimation_area[,"wm"]=Estimation_area$w*Estimation_area$mean
     Estimation_area[,"ws"]=(Estimation_area$w)^2*(Estimation_area$sd)^2
     Est_area<-aggregate(wm~code,data=Estimation_area,FUN = sum)
     sdarea<-aggregate(ws~code,data=Estimation_area,FUN=sum)
     result_mcmc_area<-data.frame(t(samps1[[1]][, c((nvar+3):(nvar+3+n-1))]))
-    dtarea<-data.frame(result_mcmc_area,w=data[,weight],gr=data[,area])
-    dtarea<-setDT(dtarea)
+    dtarea<-data.table(result_mcmc_area,w=data[,weight],gr=data[,area])
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))
@@ -351,6 +351,7 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     beta <- cbind(beta, q_beta)
     Estimation <- data.frame(Estimation1,q_Estimation)
     colnames(Estimation) <- c("Mean","SD","2.5%","25%","50%","75%","97.5%")
+    w<-gr<-0
     Estimation_area<-data.frame(cbind(Estimation1,w=data[,weight],code=data[,area]))
     Estimation_area[,"wm"]=Estimation_area$w*Estimation_area$mean
     Estimation_area[,"ws"]=(Estimation_area$w)^2*(Estimation_area$sd)^2
@@ -364,8 +365,7 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
       result_mcmc_area[-r,i]<-result_mcmc_area_s[,i]
     }
     result_mcmc_area<-data.frame(result_mcmc_area)
-    dtarea<-data.frame(result_mcmc_area,w=data[,weight],gr=data[,area])
-    dtarea<-setDT(dtarea)
+    dtarea<-data.table(result_mcmc_area,w=data[,weight],gr=data[,area])
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))})

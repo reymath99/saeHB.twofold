@@ -65,7 +65,7 @@ data(dataTwofold)
 formula=y~x1+x2
 
 #model fitting
-mod=NormalTF(formula,vardir="vardir",area="codearea",weight="w",iter.update=3,iter.mcmc=2000,thin=4,burn.in=1000,data=dataTwofold)
+mod=NormalTF(formula,vardir="vardir",area="codearea",weight="w",data=dataTwofold)
 
 #estimate
 mod$Est_sub #Subarea mean estimate
