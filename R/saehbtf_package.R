@@ -20,7 +20,7 @@
 #'
 #' @docType package
 #' @name saeHB.twofold
-#' @import @import stringr
+#' @import stringr
 #' @import coda
 #' @import rjags
 #' @import stats
