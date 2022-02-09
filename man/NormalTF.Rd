@@ -2,7 +2,7 @@
 % Please edit documentation in R/NormalTF.R
 \name{NormalTF}
 \alias{NormalTF}
-\title{This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014)}
+\title{Small Area Estimation Using Hierarchical Bayesian Method under Twofold Subarea Level Model with Normal distribution}
 \usage{
 NormalTF(
   formula,
@@ -52,7 +52,10 @@ This function returns a list with following objects:
 }
 }
 \description{
-This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}
+\itemize{
+ \item {This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}}
+ \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014)}
+}
 }
 \examples{
 ##load dataset for data without any nonsampled subarea

@@ -46,21 +46,21 @@ library(saeHB.twofold)
 data(dataTwofold)
 #for dataset with nonsampled subarea use dataTwofoldNS
 #fitting model
-model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 10000,thin=4,burn.in = 1000,data=dataTwofold)
+model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",data=dataTwofold)
 ```
 
 Extract subarea mean estimation
-```{r}
+```r
 model$Est_sub
 ```
 
 Extract area mean estimation
-```{r}
+```r
 model$Est_area
 ```
 
 Extract coefficient estimation $\beta$
-```{r}
+```r
 model$coefficient
 ```
 
@@ -71,7 +71,7 @@ model$refvar
 ```
 
 Calculate relative standard error or CV
-```{r}
+```r
 CV=(model$Est_sub$SD)/(model$Est_sub$Mean)*100
 #cv summaries
 summary(CV)

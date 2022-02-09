@@ -28,4 +28,5 @@
 #' @import grDevices
 #' @import graphics
 #' @import data.table
+#' @importFrom utils tail
 NULL

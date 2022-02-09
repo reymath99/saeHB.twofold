@@ -34,6 +34,7 @@
 #' @import grDevices
 #' @import graphics
 #' @import data.table
+#' @importFrom utils tail
 #'
 #' @export NormalTF
 #'
@@ -45,7 +46,7 @@
 #' formula=y~x1+x2
 #'
 #' #model fitting
-#' mod=NormalTF(formula,vardir="vardir",area="codearea",weight="w",iter.update=3,iter.mcmc=2000,thin=4,burn.in=1000,data=dataTwofold)
+#' mod=NormalTF(formula,vardir="vardir",area="codearea",weight="w",data=dataTwofold)
 #'
 #' #estimate
 #' mod$Est_sub #Subarea mean estimate
@@ -209,7 +210,8 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     Est_area<-aggregate(wm~code,data=Estimation_area,FUN = sum)
     sdarea<-aggregate(ws~code,data=Estimation_area,FUN=sum)
     result_mcmc_area<-data.frame(t(samps1[[1]][, c((nvar+3):(nvar+3+n-1))]))
-    dtarea<-data.table(result_mcmc_area,w=data[,weight],gr=data[,area])
+    dtarea<-data.frame(result_mcmc_area,w=data[,weight],gr=data[,area])
+    dtarea<-setDT(dtarea)
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))
@@ -362,7 +364,8 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
       result_mcmc_area[-r,i]<-result_mcmc_area_s[,i]
     }
     result_mcmc_area<-data.frame(result_mcmc_area)
-    dtarea<-data.table(result_mcmc_area,w=data[,weight],gr=data[,area])
+    dtarea<-data.frame(result_mcmc_area,w=data[,weight],gr=data[,area])
+    dtarea<-setDT(dtarea)
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))})
