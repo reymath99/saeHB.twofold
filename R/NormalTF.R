@@ -1,6 +1,10 @@
 #' @title Small Area Estimation Using Hierarchical Bayesian Method under Twofold Subarea Level Model with Normal distribution
 #'
-#' @description This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}
+#' @description
+#' \itemize{
+#'  \item {This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}}
+#'  \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014)}
+#' }
 #'
 #' @param formula Formula that describe the fitted model
 #' @param vardir Sampling variances of direct estimations
