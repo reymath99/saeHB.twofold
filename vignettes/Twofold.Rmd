@@ -1,0 +1,72 @@
+---
+title: "An Application to HB Twofold Normal Model On sampel dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{An Application to HB Twofold Normal Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## FIRST STEPS: Load package and load the data
+```{r setup}
+library(saeHB.twofold)
+data("dataTwofold")
+```
+
+## STEPS 2: Fitting HB Model
+```{r}
+model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 10000,thin=4,burn.in = 1000,data=dataTwofold)
+```
+
+## STEP 3 Extract mean estimation
+
+### Subarea Estimation
+```{r}
+model$Est_sub
+```
+### Area Estimatio
+```{r}
+model$Est_area
+```
+### Coefficient Estimation
+```{r}
+model$coefficient
+```
+### Random effect variance estimation
+```{r}
+model$refvar
+```
+
+## STEP 3 : Extract CV and MSE Subarea
+* CV $CV(\theta\hat)=\sqrt(V(\theta\hat ))/\theta\hat$
+* MSE $MSE= V(\theta\hat)$
+```{r}
+CV=(model$Est_sub$SD)/(model$Est_sub$Mean)*100
+MSE=model$Est_sub$SD^2
+summary(cbind(CV,MSE))
+```
+## STEP 4 Extract CV and MSE of Area
+```{r}
+CV2=(model$Est_area$SD)/(model$Est_area$Mean)*100
+MSE2=model$Est_area$SD^2
+summary(cbind(CV2,MSE2))
+```
+
+## STEP 5 : You can also compare the CV between subarea direct estimator and HB Twofold estimator
+```{r}
+dirCV=sqrt(dataTwofold$vardir)/(dataTwofold$y)*100
+summary(cbind(dirCV,CV))
+```
+
+* Look that CV on our model is less than CV on direct estimator.
+```{r}
+boxplot(cbind(dirCV,CV),ylim=c(0,50))
+```
+
