@@ -17,7 +17,8 @@ Imports:
     stats,
     grDevices,
     graphics,
-    data.table
+    data.table,
+    utils
 RoxygenNote: 7.1.2
 Suggests: 
     saeHB,

@@ -34,7 +34,7 @@
 #' @import grDevices
 #' @import graphics
 #' @import data.table
-#' @importFrom utils tail
+#' @import utils
 #'
 #' @export NormalTF
 #'
@@ -163,7 +163,7 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
       samps1 <- window(samps, start = burn.in + 1, end = iter.mcmc)
       result_samps = summary(samps1)
       var_area= tail(result_samps$statistics,2)[1,1]
-      var_sub= tail(result_samps$statistics,2)[1,1]
+      var_sub= tail(result_samps$statistics,2)[2,1]
 
       beta = result_samps$statistics[1:(nvar), 1:2]
       for (i in 1:nvar) {
@@ -304,7 +304,7 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
       samps1 <- window(samps, start = burn.in + 1, end = iter.mcmc)
       result_samps = summary(samps1)
       var_area= tail(result_samps$statistics,2)[1,1]
-      var_sub= tail(result_samps$statistics,2)[1,1]
+      var_sub= tail(result_samps$statistics,2)[2,1]
       beta = result_samps$statistics[1:(nvar), 1:2]
       for (i in 1:nvar) {
         mu.b[i] = beta[i, 1]

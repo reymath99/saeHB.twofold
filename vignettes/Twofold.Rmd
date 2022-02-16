@@ -65,8 +65,12 @@ dirCV=sqrt(dataTwofold$vardir)/(dataTwofold$y)*100
 summary(cbind(dirCV,CV))
 ```
 
-* Look that CV on our model is less than CV on direct estimator.
+* Look that! ,CV on our model is less than CV on direct estimator.
 ```{r}
 boxplot(cbind(dirCV,CV),ylim=c(0,50))
+```
+
+```{r}
+model$refvar
 ```
 

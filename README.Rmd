@@ -41,7 +41,7 @@ devtools::install_github("reymath99/saeHB.twofold")
 
 This is a basic example of using NormalTF function to make an estimate based on sample data in this package
 
-```{r example}
+```r
 library(saeHB.twofold)
 data(dataTwofold)
 #for dataset with nonsampled subarea use dataTwofoldNS
@@ -66,7 +66,7 @@ model$coefficient
 
 Extract estimation of subarea random effect variance $\sigma^2_u$ and area random
 effect variance $\sigma^2_v$
-```{r}
+```r
 model$refvar
 ```
 

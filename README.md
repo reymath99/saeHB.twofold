@@ -53,35 +53,6 @@ data(dataTwofold)
 #for dataset with nonsampled subarea use dataTwofoldNS
 #fitting model
 model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",data=dataTwofold)
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 90
-#>    Unobserved stochastic nodes: 125
-#>    Total graph size: 864
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 90
-#>    Unobserved stochastic nodes: 125
-#>    Total graph size: 864
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 90
-#>    Unobserved stochastic nodes: 125
-#>    Total graph size: 864
-#> 
-#> Initializing model
 ```
 
 Extract subarea mean estimation
@@ -107,8 +78,6 @@ area random effect variance \(\sigma^2_v\)
 
 ``` r
 model$refvar
-#>   var_area  var_sub
-#> 1 2.101294 8.017191
 ```
 
 Calculate relative standard error or CV
