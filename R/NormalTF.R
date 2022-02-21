@@ -3,26 +3,26 @@
 #' @description
 #' \itemize{
 #'  \item {This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}}
-#'  \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014)}
+#'  \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014) and Erciulescu et al. (2019)}
 #' }
 #'
 #' @param formula Formula that describe the fitted model
-#' @param vardir Sampling variances of direct estimations
-#' @param area Index that describes the code relating to area in each subarea.This should be defined for aggregation to get area estimator
-#' @param weight Vector contain proportion units for each subarea. \eqn{w_ij}
+#' @param vardir Sampling variances of direct estimations on each subarea
+#' @param area Index that describes the code relating to area in each subarea.This should be defined for aggregation to get area estimator. Index start from 1 until m
+#' @param weight Vector contain proportion units or proportion of population on each subarea. \eqn{w_{ij}}
 #' @param iter.update Number of updates perform in Gibbs Sampling with default \code{3}
 #' @param iter.mcmc Number of total iteration per chain perform in Gibbs Sampling with default \code{2000}
 #' @param thin Thinning rate perform in Gibbs Sampling and it must be a positive integer with default \code{1}
 #' @param burn.in Number of burn in period in Gibbs Sampling with default \code{1000}
 #' @param data The data frame
-#' @param coef Default value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution
-#' @param var.coef Default value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution
+#' @param coef Initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution
+#' @param var.coef Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution
 #'
 #' @return This function returns a list with following objects:
 #' \describe{
 #'   \item{Est_sub}{A dataframe that contains the values, standar deviation, and quantile of Subarea mean Estimates using Twofold Subarea level model under Hierarchical Bayes method}
 #'   \item{Est_area}{A dataframe that contains the values, standar deviation, and quantile of Area mean Estimates using Twofold Subarea level model under Hierarchical Bayes method}
-#'   \item{refVar}{A dataframe that contains estimated subarea and area random effect variance \eqn{(\sigma_{u}^{2} and \sigma_{v}^{2})}}
+#'   \item{refVar}{A dataframe that contains estimated subarea and area random effect variance \eqn{(\sigma_{u}^{2}} and \eqn{\sigma_{v}^{2})}}
 #'   \item{coefficient}{A dataframe that contains the estimated model coefficient \eqn{\beta}}
 #'   \item{plot}{Trace, Density, Autocorrelation Function Plot of coefficient}
 #' }

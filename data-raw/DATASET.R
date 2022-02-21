@@ -7,7 +7,7 @@ narea=30
 nsub=3
 sigmav=8
 sigmau=8
-sigmae=8
+#sigmae=8
 n=narea*nsub
 X1=runif(n,0,1)
 X2=rnorm(n,10,1)
@@ -16,7 +16,11 @@ codearea=c()
 for(i in 1:narea){
   codearea=c(codearea,rep(i,nsub))
 }
-vardir=rep(sigmae,n)
+#vardir=rep(sigmae,n)
+vardir=c()
+for (i in 1:narea){
+  vardir=c(vardir,1/rgamma(nsub,1,1))
+}
 wdat=data.frame(w=wr,code=codearea)
 wmod=wdat%>%group_by(code)%>%summarise(weight=(w/sum(w)))
 w=wmod$weight

@@ -21,11 +21,11 @@ NormalTF(
 \arguments{
 \item{formula}{Formula that describe the fitted model}
 
-\item{vardir}{Sampling variances of direct estimations}
+\item{vardir}{Sampling variances of direct estimations on each subarea}
 
-\item{area}{Index that describes the code relating to area in each subarea.This should be defined for aggregation to get area estimator}
+\item{area}{Index that describes the code relating to area in each subarea.This should be defined for aggregation to get area estimator. Index start from 1 until m}
 
-\item{weight}{Vector contain proportion units for each subarea. \eqn{w_ij}}
+\item{weight}{Vector contain proportion units or proportion of population on each subarea. \eqn{w_{ij}}}
 
 \item{iter.update}{Number of updates perform in Gibbs Sampling with default \code{3}}
 
@@ -37,16 +37,16 @@ NormalTF(
 
 \item{data}{The data frame}
 
-\item{coef}{Default value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
+\item{coef}{Initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
 
-\item{var.coef}{Default value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
+\item{var.coef}{Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
 }
 \value{
 This function returns a list with following objects:
 \describe{
   \item{Est_sub}{A dataframe that contains the values, standar deviation, and quantile of Subarea mean Estimates using Twofold Subarea level model under Hierarchical Bayes method}
   \item{Est_area}{A dataframe that contains the values, standar deviation, and quantile of Area mean Estimates using Twofold Subarea level model under Hierarchical Bayes method}
-  \item{refVar}{A dataframe that contains estimated subarea and area random effect variance \eqn{(\sigma_{u}^{2} and \sigma_{v}^{2})}}
+  \item{refVar}{A dataframe that contains estimated subarea and area random effect variance \eqn{(\sigma_{u}^{2}} and \eqn{\sigma_{v}^{2})}}
   \item{coefficient}{A dataframe that contains the estimated model coefficient \eqn{\beta}}
   \item{plot}{Trace, Density, Autocorrelation Function Plot of coefficient}
 }
@@ -54,7 +54,7 @@ This function returns a list with following objects:
 \description{
 \itemize{
  \item {This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}}
- \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014)}
+ \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014) and Erciulescu et al. (2019)}
 }
 }
 \examples{

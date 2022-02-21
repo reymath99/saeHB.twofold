@@ -4,18 +4,19 @@
 #' @section Author(s):
 #' Reyhan Saadi, Azka Ubaidillah
 #'
-#' \strong{Maintaner}: Reyhan Saadi \email{16.9335@@stis.ac.id}
+#' \strong{Maintaner}: Reyhan Saadi \email{221810557@stis.ac.id}
 #'
 #' @section Functions:
 #' \describe{
-#'   \item{\code{\link{NormalTF}}}{This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on model in Torabi (2014)}
+#'   \item{\code{\link{NormalTF}}}{This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on model in Torabi (2014) amd Erciulescu et al. (2018)}
 #' }
 #'
 #' @section Reference:
 #' \itemize{
 #'  \item{Mohadjer, L.K., Rao, J.N., Liu, B., Krenzke, T., & Kerckhove, W.V. (2007). Hierarchical Bayes Small Area Estimates of Adult Literacy Using Unmatched Sampling and Linking Models.}
-#'  \item{Torabi, M., & Rao, J.N. (2014). On small area estimation under a sub-area level model. J. Multivar. Anal., 127, 36-55.}
-#'  \item{Rao, J.N.K & Molina. (2015). Small Area Estimation 2nd Edition. New York: John Wiley and Sons, Inc.}
+#'  \item{Torabi, M., & Rao, J.N. (2014). On small area estimation under a sub-area level model. J. Multivar. Anal., 127, 36-55. <doi:10.1016/j.jmva.2014.02.001>}
+#'  \item{Rao, J.N.K & Molina. (2015). Small Area Estimation 2nd Edition. New York: John Wiley and Sons, Inc. }
+#'  \item{Erciulescu, A.L., Cruze, N.B. and Nandram, B. (2019), Model-based county level crop estimates incorporating auxiliary sources of information. J. R. Stat. Soc. A, 182: 283-303. <doi:10.1111/rssa.12390>}
 #' }
 #'
 #' @docType package
