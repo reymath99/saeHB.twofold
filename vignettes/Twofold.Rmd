@@ -22,7 +22,7 @@ data("dataTwofold")
 
 ## STEPS 2: Fitting HB Model
 ```{r}
-model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 10000,thin=4,burn.in = 1000,data=dataTwofold)
+model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 50000,thin=20,burn.in = 1000,data=dataTwofold)
 ```
 
 ## STEP 3 Extract mean estimation
