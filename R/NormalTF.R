@@ -3,7 +3,7 @@
 #' @description
 #' \itemize{
 #'  \item {This function is implemented to variable of interest \eqn{y} that assumed to be a Normal Distribution. The range of data is \eqn{-\infty <y<\infty}}
-#'  \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution based on Torabi (2014) and Erciulescu et al. (2019)}
+#'  \item {This function gives estimation of subarea and area means simultaneously under Twofold Subarea Level Small Area Estimation Model Using Hierarchical Bayesian Method with Normal distribution}
 #' }
 #'
 #' @param formula Formula that describe the fitted model
@@ -56,6 +56,8 @@
 #'
 #' ##for dataset with nonsampled subarea use dataTwofoldNS
 NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2000, thin = 1, burn.in = 1000, data,coef,var.coef){
+  opar <- par("mar")
+  on.exit(par(opar))
   result <- list()
   formuladata <- model.frame(formula, data, na.action = NULL)
   if (any(is.na(formuladata[, -1]))) {
