@@ -15,8 +15,8 @@
 #' @param thin Thinning rate perform in Gibbs Sampling and it must be a positive integer with default \code{1}
 #' @param burn.in Number of burn in period in Gibbs Sampling with default \code{1000}
 #' @param data The data frame
-#' @param coef Initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution
-#' @param var.coef Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution
+#' @param coef Vector contains initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution
+#' @param var.coef Vector contains Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution
 #'
 #' @return This function returns a list with following objects:
 #' \describe{
@@ -137,19 +137,15 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
                     theta[i]<- beta[1] + inprod(beta[2:nvar],x[i,]) + v[state2[i]]+u[i]
                     u[i]~dnorm(0, sigma_u2)
                   }
-
                   # M states
                   for (j in 1:m) {
                     v[j] ~ dnorm(0,sigma_v2)
                   }
-
                   # Priors for beta
                   for (k in 1:nvar){
                     beta[k]~dnorm(mu.b[k],tau.b[k])
                   }
-
                   # Priors for variance over area and subarea
-
                   sigma_u2 ~ dgamma(tau.ua, tau.ub)
                   sigma_v2 ~ dgamma(tau.va, tau.vb)
                   var_sub <- 1/sigma_u2
@@ -207,18 +203,15 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     Estimation <- data.frame(Estimation1,q_mu)
     colnames(Estimation) <- c("Mean","SD","2.5%","25%","50%","75%","97.5%")
     w<-gr<-0
-    Estimation_area<-data.frame(cbind(Estimation1,w=data[,weight],code=data[,area]))
-    Estimation_area[,"wm"]=Estimation_area$w*Estimation_area$mean
-    Estimation_area[,"ws"]=(Estimation_area$w)^2*(Estimation_area$sd)^2
-    Est_area<-aggregate(wm~code,data=Estimation_area,FUN = sum)
-    sdarea<-aggregate(ws~code,data=Estimation_area,FUN=sum)
     result_mcmc_area<-data.frame(t(samps1[[1]][, c((nvar+3):(nvar+3+n-1))]))
     dtarea<-data.table(result_mcmc_area,w=data[,weight],gr=data[,area])
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))
     })
-    Est_area2<-data.frame(cbind(Est_area$wm,sqrt(sdarea$ws),t(Quantiles_area)))
+    Quantiles_Mean<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=mean)
+    Quantiles_SD <-apply(Quantilesdt[,-1],MARGIN = 1,FUN=sd)
+    Est_area2<-data.frame(cbind(Quantiles_Mean,Quantiles_SD,t(Quantiles_area)))
     colnames(Est_area2)<-c("Mean","SD","2.5%","25%","50%","75%","97.5%")
   }else{
 
@@ -271,26 +264,20 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
                     theta[i]<- beta[1] + inprod(beta[2:nvar],x_sampled[i,]) + v[state2_sampled[i]]+u1[i]
                     u1[i]~dnorm(0, sigma_u2)
                   }
-
                   #N observations non_sampled y=xb+vi (Torabi,2014)
                   for (j in 1:n2) {
                     theta.nonsampled[j] <- mu.b[1] + inprod(mu.b[2:nvar],x_nonsampled[j,]) + v[state2_nonsampled[j]]+u2[j]
                     u2[j]~dnorm(0,sigma_u2)
                   }
-
-
                   # M states
                   for (l in 1:m) {
                     v[l] ~ dnorm(0,sigma_v2)
                   }
-
                   # Priors for beta
                   for (k in 1:nvar){
                     beta[k]~dnorm(mu.b[k],tau.b[k])
                   }
-
                   # Priors for variance over area and subarea
-
                   sigma_u2 ~ dgamma(tau.ua, tau.ub)
                   sigma_v2 ~ dgamma(tau.va, tau.vb)
                   var_sub <- 1/sigma_u2
@@ -354,11 +341,6 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     Estimation <- data.frame(Estimation1,q_Estimation)
     colnames(Estimation) <- c("Mean","SD","2.5%","25%","50%","75%","97.5%")
     w<-gr<-0
-    Estimation_area<-data.frame(cbind(Estimation1,w=data[,weight],code=data[,area]))
-    Estimation_area[,"wm"]=Estimation_area$w*Estimation_area$mean
-    Estimation_area[,"ws"]=(Estimation_area$w)^2*(Estimation_area$sd)^2
-    Est_area<-aggregate(wm~code,data=Estimation_area,FUN = sum)
-    sdarea<-aggregate(ws~code,data=Estimation_area,FUN=sum)
     result_mcmc_area_s<-data.frame(t(samps1[[1]][, c((nvar+3):(nvar+3+n1-1))]))
     result_mcmc_area_ns<-data.frame(t(samps1[[1]][, c((nvar+3+n1):(nvar+3+n-1))]))
     result_mcmc_area <- matrix(0,n,ncol(result_mcmc_area_s))
@@ -371,13 +353,15 @@ NormalTF<-function (formula, vardir, area, weight,iter.update = 3, iter.mcmc = 2
     Quantilesdt<-dtarea[, lapply(.SD, function(x, w) sum(x*w), w=w), by=gr][, w := NULL]
     Quantiles_area<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=function(x){
       quantile(x,probs = c(0.025,0.25,0.50,0.75,0.975))})
-    Est_area2<-data.frame(cbind(Est_area$wm,sqrt(sdarea$ws),t(Quantiles_area)))
+    Quantiles_Mean<-apply(Quantilesdt[,-1],MARGIN = 1,FUN=mean)
+    Quantiles_SD <-apply(Quantilesdt[,-1],MARGIN = 1,FUN=sd)
+    Est_area2<-data.frame(cbind(Quantiles_Mean,Quantiles_SD,t(Quantiles_area)))
     colnames(Est_area2)<-c("Mean","SD","2.5%","25%","50%","75%","97.5%")
   }
 
   result$Est_sub = Estimation
   result$Est_area = Est_area2
-  result$refvar = refVari
+  result$refVar = refVari
   result$coefficient = beta
   result$plot = list(graphics.off(), par(mar = c(2, 2, 2, 2)),
                      autocorr.plot(result_mcmc, col = "brown2", lwd = 2),

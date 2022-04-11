@@ -77,7 +77,7 @@ Extract estimation of subarea random effect variance \(\sigma^2_u\) and
 area random effect variance \(\sigma^2_v\)
 
 ``` r
-model$refvar
+model$refVar
 ```
 
 Calculate relative standard error or CV

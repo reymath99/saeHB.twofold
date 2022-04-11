@@ -22,7 +22,7 @@ data("dataTwofold")
 
 ## STEPS 2: Fitting HB Model
 ```{r}
-model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 50000,thin=20,burn.in = 1000,data=dataTwofold)
+model=NormalTF(y~x1+x2,vardir="vardir",area = "codearea",weight = "w",iter.mcmc = 100000,thin=50,burn.in = 1000,data=dataTwofold)
 ```
 
 ## STEP 3 Extract mean estimation
@@ -41,11 +41,11 @@ model$coefficient
 ```
 ### Random effect variance estimation
 ```{r}
-model$refvar
+model$refVar
 ```
 
 ## STEP 3 : Extract CV and MSE Subarea
-* CV $CV(\theta\hat)=\sqrt(V(\theta\hat ))/\theta\hat$
+* CV $CV(\theta \hat)=\frac{SD(\theta \hat)}{(\theta \hat)} \times 100$
 * MSE $MSE= V(\theta\hat)$
 ```{r}
 CV=(model$Est_sub$SD)/(model$Est_sub$Mean)*100
@@ -71,6 +71,6 @@ boxplot(cbind(dirCV,CV),ylim=c(0,50))
 ```
 
 ```{r}
-model$refvar
+model$refVar
 ```
 

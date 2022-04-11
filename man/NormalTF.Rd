@@ -37,9 +37,9 @@ NormalTF(
 
 \item{data}{The data frame}
 
-\item{coef}{Initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
+\item{coef}{Vector contains initial value for mean on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
 
-\item{var.coef}{Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
+\item{var.coef}{Vector contains Initial value for varians on coefficient's prior distribution or \eqn{\beta}'s prior distribution}
 }
 \value{
 This function returns a list with following objects:

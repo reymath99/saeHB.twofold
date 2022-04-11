@@ -7,13 +7,13 @@
 #'   \item This data contains NA values that indicates no sampled at one or more Subareas. It uses the \code{\link{dataTwofold}} with the direct estimates and the related variances in 10 subareas are missing.
 #'  }
 #'
-#' @format A data frame with 90 row and 7 column:
+#' @format A data frame with 90 rows and 6 columns:
 #' \describe{
-#'  \item{y}{Direct estimation of subarea mean \eqn{y}}
-#'  \item{x1}{Auxiliary variabel of \eqn{x_1}}
-#'  \item{x2}{Auxiliary variabel of \eqn{x_2}}
+#'  \item{y}{Direct estimation of subarea mean \eqn{y_{ij}}}
+#'  \item{x1}{Auxiliary variabel of \eqn{x_{ij1}}}
+#'  \item{x2}{Auxiliary variabel of \eqn{x_{ij2}}}
 #'  \item{codearea}{Index that describes the code relating to area for each subarea}
-#'  \item{w}{Unit proportion on each subarea or weight}
-#'  \item{vardir}{Sampling variance of y}
+#'  \item{w}{Unit proportion on each subarea or weight \eqn{w_{ij}}}
+#'  \item{vardir}{Sampling variance of direct estimator \eqn{y_{ij}}}
 #' }
 "dataTwofoldNS"
